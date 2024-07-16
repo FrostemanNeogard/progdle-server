@@ -1,13 +1,18 @@
 package com.liam.progdleapi.hints;
 
-import com.liam.progdleapi.languages.Language;
+import com.liam.progdleapi.languages.entity.Language;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
 @Entity
-public class Hint {
+@Getter
+@Setter
+@Table(name = "snippets")
+public class Snippet {
     @Id
     @UuidGenerator
     private UUID id;
