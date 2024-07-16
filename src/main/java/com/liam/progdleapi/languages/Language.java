@@ -1,6 +1,6 @@
 package com.liam.progdleapi.languages;
 
-import com.liam.progdleapi.hints.Hint;
+import com.liam.progdleapi.hints.Snippet;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
 
@@ -17,5 +17,5 @@ public class Language {
     private String name;
 
     @OneToMany(mappedBy = "language")
-    private List<Hint> hints;
+    private List<Snippet> snippets;
 }
