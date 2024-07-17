@@ -9,11 +9,68 @@ import org.springframework.stereotype.Service;
 public class GuessService {
 
     private final LanguagesService languagesService;
-    private final Language CORRECT_LANGUAGE;
+    private Language CORRECT_LANGUAGE;
 
     private GuessService(LanguagesService languagesService) {
         this.languagesService = languagesService;
         this.CORRECT_LANGUAGE = languagesService.findLanguageByName("JavaScript");
+    }
+
+    private STATES validateReleaseYear(Language language) {
+        if (language.getReleaseYear() == CORRECT_LANGUAGE.getReleaseYear()) {
+            return STATES.CORRECT;
+        }
+        if (language.getReleaseYear() < CORRECT_LANGUAGE.getReleaseYear()) {
+            return STATES.PARTIAL;
+        }
+        return STATES.INCORRECT;
+    }
+
+    private STATES validateParadigm(Language language) {
+        if (language.getParadigm().equals(CORRECT_LANGUAGE.getParadigm())) {
+            return STATES.CORRECT;
+        }
+        if (CORRECT_LANGUAGE.getParadigm().contains(language.getParadigm())) {
+            return STATES.PARTIAL;
+        }
+        return STATES.INCORRECT;
+    }
+
+    private STATES validateTyping(Language language) {
+        if (language.getTyping().equals(CORRECT_LANGUAGE.getTyping())) {
+            return STATES.CORRECT;
+        }
+        if (CORRECT_LANGUAGE.getTyping().contains(language.getTyping())) {
+            return STATES.PARTIAL;
+        }
+        return STATES.INCORRECT;
+    }
+
+    private STATES validateDomain(Language language) {
+        if (language.getDomain().equals(CORRECT_LANGUAGE.getDomain())) {
+            return STATES.CORRECT;
+        }
+        if (CORRECT_LANGUAGE.getDomain().contains(language.getDomain())) {
+            return STATES.PARTIAL;
+        }
+        return STATES.INCORRECT;
+    }
+
+    private STATES validateOs(Language language) {
+        if (language.getOs().equals(CORRECT_LANGUAGE.getOs())) {
+            return STATES.CORRECT;
+        }
+        if (CORRECT_LANGUAGE.getOs().contains(language.getOs())) {
+            return STATES.PARTIAL;
+        }
+        return STATES.INCORRECT;
+    }
+
+    private STATES validateMemorySafe(Language language) {
+        if (language.isMemorySafe() == CORRECT_LANGUAGE.isMemorySafe()) {
+            return STATES.CORRECT;
+        }
+        return STATES.INCORRECT;
     }
 
     public enum STATES {
@@ -23,15 +80,28 @@ public class GuessService {
     }
 
     public Guess validateGuess(Language language) {
-        Guess guess = new Guess(
-                STATES.PARTIAL,
-                STATES.PARTIAL,
-                STATES.PARTIAL,
-                STATES.PARTIAL,
-                STATES.PARTIAL,
-                STATES.PARTIAL
+        if (CORRECT_LANGUAGE == null) {
+            CORRECT_LANGUAGE = this.languagesService.findLanguageByName("JavaScript");
+        }
+        if (language.equals(CORRECT_LANGUAGE)) {
+            return new Guess(
+                    STATES.CORRECT,
+                    STATES.CORRECT,
+                    STATES.CORRECT,
+                    STATES.CORRECT,
+                    STATES.CORRECT,
+                    STATES.CORRECT
+            );
+        }
+
+        return new Guess(
+                validateReleaseYear(language),
+                validateParadigm(language),
+                validateTyping(language),
+                validateDomain(language),
+                validateMemorySafe(language),
+                validateOs(language)
         );
-        return guess;
     }
 
 }
