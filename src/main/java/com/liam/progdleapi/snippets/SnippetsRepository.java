@@ -9,4 +9,5 @@ import java.util.UUID;
 
 public interface SnippetsRepository extends ListCrudRepository<Snippet, UUID> {
     List<Snippet> findByLanguage(Language language);
+    Snippet findByLevel(Long level);
 }
