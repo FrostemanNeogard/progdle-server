@@ -14,4 +14,5 @@ public class Guess {
     private GuessService.STATES os;
     private GuessService.STATES paradigm;
     private GuessService.STATES typing;
+    private String languageName;
 }

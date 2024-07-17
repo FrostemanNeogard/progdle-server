@@ -9,7 +9,9 @@ public record GuessDto(
         GuessService.STATES name,
         GuessService.STATES os,
         GuessService.STATES paradigm,
-        GuessService.STATES typing) {
+        GuessService.STATES typing,
+        String languageName
+) {
     public static GuessDto from(Guess guess) {
         return new GuessDto(
                 guess.getMemorySafe(),
@@ -18,7 +20,8 @@ public record GuessDto(
                 guess.getName(),
                 guess.getOs(),
                 guess.getParadigm(),
-                guess.getTyping()
+                guess.getTyping(),
+                guess.getLanguageName()
         );
     }
 }

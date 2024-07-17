@@ -98,7 +98,8 @@ public class GuessService {
                     STATES.CORRECT,
                     STATES.CORRECT,
                     STATES.CORRECT,
-                    STATES.CORRECT
+                    STATES.CORRECT,
+                    CORRECT_LANGUAGE.getName()
             );
         }
 
@@ -109,7 +110,8 @@ public class GuessService {
                 validateName(language),
                 validateOs(language),
                 validateParadigm(language),
-                validateTyping(language)
+                validateTyping(language),
+                language.getName()
         );
     }
 
