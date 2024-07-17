@@ -10,9 +10,11 @@ import java.util.UUID;
 public class LanguagesService {
 
     private final LanguageRepository languageRepository;
+    public Language CORRECT_LANGUAGE;
 
     public LanguagesService(LanguageRepository languageRepository) {
         this.languageRepository = languageRepository;
+        this.CORRECT_LANGUAGE = languageRepository.findByName("JavaScript");
     }
 
     public List<Language> getAllLanguages() {
