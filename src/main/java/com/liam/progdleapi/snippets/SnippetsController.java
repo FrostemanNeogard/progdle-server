@@ -14,6 +14,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/snippets")
+@CrossOrigin
 public class SnippetsController {
 
     private final SnippetsService snippetsService;
