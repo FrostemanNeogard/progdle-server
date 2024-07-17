@@ -1,4 +1,4 @@
-package com.liam.progdleapi.hints;
+package com.liam.progdleapi.snippets.entity;
 
 import com.liam.progdleapi.languages.entity.Language;
 import jakarta.persistence.*;
@@ -23,4 +23,7 @@ public class Snippet {
 
     @Column
     private String content;
+
+    @Column
+    private long level;
 }
