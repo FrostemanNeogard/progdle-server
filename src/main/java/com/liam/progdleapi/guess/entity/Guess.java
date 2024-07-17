@@ -1,6 +1,7 @@
 package com.liam.progdleapi.guess.entity;
 
 import com.liam.progdleapi.guess.GuessService;
+import com.liam.progdleapi.languages.entity.Language;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -14,5 +15,5 @@ public class Guess {
     private GuessService.STATES os;
     private GuessService.STATES paradigm;
     private GuessService.STATES typing;
-    private String languageName;
+    private Language language;
 }

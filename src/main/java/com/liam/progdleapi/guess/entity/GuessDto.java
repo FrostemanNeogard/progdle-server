@@ -1,6 +1,8 @@
 package com.liam.progdleapi.guess.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.liam.progdleapi.guess.GuessService;
+import com.liam.progdleapi.languages.entity.LanguageDto;
 
 public record GuessDto(
         GuessService.STATES memorySafe,
@@ -10,7 +12,7 @@ public record GuessDto(
         GuessService.STATES os,
         GuessService.STATES paradigm,
         GuessService.STATES typing,
-        String languageName
+        @JsonProperty("languageData") LanguageDto language
 ) {
     public static GuessDto from(Guess guess) {
         return new GuessDto(
@@ -21,7 +23,7 @@ public record GuessDto(
                 guess.getOs(),
                 guess.getParadigm(),
                 guess.getTyping(),
-                guess.getLanguageName()
+                LanguageDto.from(guess.getLanguage())
         );
     }
 }
