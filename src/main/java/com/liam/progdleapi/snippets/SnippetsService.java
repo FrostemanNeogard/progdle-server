@@ -32,6 +32,14 @@ public class SnippetsService {
     }
 
     public Snippet createSnippet(Snippet snippet) {
+        Snippet existingSnippet = this.snippetsRepo.findByLevel(snippet.getLevel());
+        if (existingSnippet != null) {
+            this.snippetsRepo.delete(existingSnippet);
+        }
         return this.snippetsRepo.save(snippet);
+    }
+
+    public List<Snippet> getDailySnippets() {
+        return this.snippetsRepo.findByLanguage(languagesService.CORRECT_LANGUAGE);
     }
 }
