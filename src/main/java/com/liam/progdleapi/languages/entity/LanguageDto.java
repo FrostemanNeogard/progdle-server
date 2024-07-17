@@ -10,7 +10,8 @@ public record LanguageDto(
         String name,
         String os,
         String paradigm,
-        String typing) {
+        String typing
+) {
     public static LanguageDto from(Language language) {
         return new LanguageDto(
                 language.getId(),
