@@ -8,6 +8,7 @@ import lombok.Getter;
 @Getter
 public class Guess {
     private GuessService.STATES memorySafe;
+    private GuessService.STATES releaseYear;
     private GuessService.STATES domain;
     private GuessService.STATES name;
     private GuessService.STATES os;

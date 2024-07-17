@@ -56,6 +56,13 @@ public class GuessService {
         return STATES.INCORRECT;
     }
 
+    private STATES validateName(Language language) {
+        if (language.getName().equals(CORRECT_LANGUAGE.getName())) {
+            return STATES.CORRECT;
+        }
+        return STATES.INCORRECT;
+    }
+
     private STATES validateOs(Language language) {
         if (language.getOs().equals(CORRECT_LANGUAGE.getOs())) {
             return STATES.CORRECT;
@@ -90,17 +97,19 @@ public class GuessService {
                     STATES.CORRECT,
                     STATES.CORRECT,
                     STATES.CORRECT,
+                    STATES.CORRECT,
                     STATES.CORRECT
             );
         }
 
         return new Guess(
-                validateReleaseYear(language),
-                validateParadigm(language),
-                validateTyping(language),
-                validateDomain(language),
                 validateMemorySafe(language),
-                validateOs(language)
+                validateReleaseYear(language),
+                validateDomain(language),
+                validateName(language),
+                validateOs(language),
+                validateParadigm(language),
+                validateTyping(language)
         );
     }
 
