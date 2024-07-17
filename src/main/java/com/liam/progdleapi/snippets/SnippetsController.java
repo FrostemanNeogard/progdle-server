@@ -36,6 +36,16 @@ public class SnippetsController {
         return ResponseEntity.ok(snippets.stream().map(SnippetDto::from).toList());
     }
 
+    @GetMapping("/daily/{level}")
+    public ResponseEntity<SnippetDto> getDailySnippetByLevel(@PathVariable Integer level) {
+        if (level < 1 || level > 5) {
+            return ResponseEntity.badRequest().build();
+        }
+        List<Snippet> snippets = this.snippetsService.getDailySnippets();
+        System.out.println(snippets);
+        return ResponseEntity.ok(SnippetDto.from(snippets.get(level - 1)));
+    }
+
     @PostMapping
     public ResponseEntity<SnippetDto> createSnippet(@RequestBody CreateSnippetDto dto) {
         Language language = languagesService.getLanguageById(dto.languageId());
@@ -50,6 +60,5 @@ public class SnippetsController {
 
         Snippet newSnippet = this.snippetsService.createSnippet(snippet);
         return ResponseEntity.created(URI.create("/api/snippets/" + newSnippet.getId())).body(SnippetDto.from(newSnippet));
-
     }
 }
