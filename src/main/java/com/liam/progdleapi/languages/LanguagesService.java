@@ -10,11 +10,17 @@ import java.util.UUID;
 public class LanguagesService {
 
     private final LanguageRepository languageRepository;
-    public Language CORRECT_LANGUAGE;
+    private Language CORRECT_LANGUAGE;
 
     public LanguagesService(LanguageRepository languageRepository) {
         this.languageRepository = languageRepository;
-        this.CORRECT_LANGUAGE = languageRepository.findByName("JavaScript");
+    }
+
+    public Language getDailyLanguage() {
+        if (CORRECT_LANGUAGE == null) {
+            CORRECT_LANGUAGE = languageRepository.findByName("JavaScript");
+        }
+        return CORRECT_LANGUAGE;
     }
 
     public List<Language> getAllLanguages() {

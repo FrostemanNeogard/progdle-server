@@ -40,6 +40,6 @@ public class SnippetsService {
     }
 
     public List<Snippet> getDailySnippets() {
-        return this.snippetsRepo.findByLanguage(languagesService.CORRECT_LANGUAGE);
+        return this.snippetsRepo.findByLanguage(languagesService.getDailyLanguage());
     }
 }

@@ -15,64 +15,64 @@ public class GuessService {
     }
 
     private STATES validateReleaseYear(Language language) {
-        if (language.getReleaseYear() == languagesService.CORRECT_LANGUAGE.getReleaseYear()) {
+        if (language.getReleaseYear() == languagesService.getDailyLanguage().getReleaseYear()) {
             return STATES.CORRECT;
         }
-        if (language.getReleaseYear() < languagesService.CORRECT_LANGUAGE.getReleaseYear()) {
+        if (language.getReleaseYear() < languagesService.getDailyLanguage().getReleaseYear()) {
             return STATES.PARTIAL;
         }
         return STATES.INCORRECT;
     }
 
     private STATES validateParadigm(Language language) {
-        if (language.getParadigm().equals(languagesService.CORRECT_LANGUAGE.getParadigm())) {
+        if (language.getParadigm().equals(languagesService.getDailyLanguage().getParadigm())) {
             return STATES.CORRECT;
         }
-        if (languagesService.CORRECT_LANGUAGE.getParadigm().contains(language.getParadigm())) {
+        if (languagesService.getDailyLanguage().getParadigm().contains(language.getParadigm())) {
             return STATES.PARTIAL;
         }
         return STATES.INCORRECT;
     }
 
     private STATES validateTyping(Language language) {
-        if (language.getTyping().equals(languagesService.CORRECT_LANGUAGE.getTyping())) {
+        if (language.getTyping().equals(languagesService.getDailyLanguage().getTyping())) {
             return STATES.CORRECT;
         }
-        if (languagesService.CORRECT_LANGUAGE.getTyping().contains(language.getTyping())) {
+        if (languagesService.getDailyLanguage().getTyping().contains(language.getTyping())) {
             return STATES.PARTIAL;
         }
         return STATES.INCORRECT;
     }
 
     private STATES validateDomain(Language language) {
-        if (language.getDomain().equals(languagesService.CORRECT_LANGUAGE.getDomain())) {
+        if (language.getDomain().equals(languagesService.getDailyLanguage().getDomain())) {
             return STATES.CORRECT;
         }
-        if (languagesService.CORRECT_LANGUAGE.getDomain().contains(language.getDomain())) {
+        if (languagesService.getDailyLanguage().getDomain().contains(language.getDomain())) {
             return STATES.PARTIAL;
         }
         return STATES.INCORRECT;
     }
 
     private STATES validateName(Language language) {
-        if (language.getName().equals(languagesService.CORRECT_LANGUAGE.getName())) {
+        if (language.getName().equals(languagesService.getDailyLanguage().getName())) {
             return STATES.CORRECT;
         }
         return STATES.INCORRECT;
     }
 
     private STATES validateOs(Language language) {
-        if (language.getOs().equals(languagesService.CORRECT_LANGUAGE.getOs())) {
+        if (language.getOs().equals(languagesService.getDailyLanguage().getOs())) {
             return STATES.CORRECT;
         }
-        if (languagesService.CORRECT_LANGUAGE.getOs().contains(language.getOs())) {
+        if (languagesService.getDailyLanguage().getOs().contains(language.getOs())) {
             return STATES.PARTIAL;
         }
         return STATES.INCORRECT;
     }
 
     private STATES validateMemorySafe(Language language) {
-        if (language.isMemorySafe() == languagesService.CORRECT_LANGUAGE.isMemorySafe()) {
+        if (language.isMemorySafe() == languagesService.getDailyLanguage().isMemorySafe()) {
             return STATES.CORRECT;
         }
         return STATES.INCORRECT;
@@ -85,22 +85,6 @@ public class GuessService {
     }
 
     public Guess validateGuess(Language language) {
-        if (languagesService.CORRECT_LANGUAGE == null) {
-            languagesService.CORRECT_LANGUAGE = this.languagesService.findLanguageByName("JavaScript");
-        }
-        if (language.equals(languagesService.CORRECT_LANGUAGE)) {
-            return new Guess(
-                    STATES.CORRECT,
-                    STATES.CORRECT,
-                    STATES.CORRECT,
-                    STATES.CORRECT,
-                    STATES.CORRECT,
-                    STATES.CORRECT,
-                    STATES.CORRECT,
-                    languagesService.CORRECT_LANGUAGE
-            );
-        }
-
         return new Guess(
                 validateMemorySafe(language),
                 validateReleaseYear(language),
