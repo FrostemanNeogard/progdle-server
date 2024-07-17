@@ -1,6 +1,6 @@
 package com.liam.progdleapi.languages.entity;
 
-import com.liam.progdleapi.hints.Snippet;
+import com.liam.progdleapi.snippets.entity.Snippet;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
