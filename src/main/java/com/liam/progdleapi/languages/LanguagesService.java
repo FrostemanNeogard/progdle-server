@@ -32,4 +32,13 @@ public class LanguagesService {
     public Language findLanguageByName(String name) {
         return languageRepository.findByName(name);
     }
+
+    public boolean deleteLanguageById(UUID id) {
+        Language language = languageRepository.findById(id).orElse(null);
+        if (language == null) {
+            return false;
+        }
+        languageRepository.delete(language);
+        return true;
+    }
 }

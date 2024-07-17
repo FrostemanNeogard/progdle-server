@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/languages")
@@ -33,4 +34,14 @@ public class LanguagesController {
                 .created(URI.create("/api/languages/" + newLanguage.getId()))
                 .body(LanguageDto.from(newLanguage));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteLanguage(@PathVariable UUID id) {
+        boolean isDeleted = this.languagesService.deleteLanguageById(id);
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }
