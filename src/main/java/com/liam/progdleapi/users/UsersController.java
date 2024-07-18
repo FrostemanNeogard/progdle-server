@@ -49,6 +49,9 @@ public class UsersController {
             @PathVariable UUID id,
             @RequestBody UpdateUserDto dto) {
         User user = usersService.getUserById(id);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
         user.setUsername(dto.username());
         user.setProfilePictureSrc(dto.profilePictureSrc());
         User updatedUser = usersService.updateUser(user);
