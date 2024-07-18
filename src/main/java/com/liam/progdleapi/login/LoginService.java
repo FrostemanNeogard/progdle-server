@@ -23,7 +23,7 @@ public class LoginService {
             return null;
         }
 
-        return "VALID_LOGIN_TOKEN";
+        return user.getUsername() + "&" + user.getPassword();
     }
 
 }
