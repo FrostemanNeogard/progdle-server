@@ -1,6 +1,7 @@
 package com.liam.progdleapi.login;
 
 import com.liam.progdleapi.login.entity.LoginDto;
+import com.liam.progdleapi.login.entity.LoginTokenDto;
 import com.liam.progdleapi.users.UsersService;
 import com.liam.progdleapi.users.entity.User;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class LoginController {
     }
 
     @PostMapping
-    public ResponseEntity<String> loginByUsernameAndPassword(@RequestBody LoginDto dto) {
+    public ResponseEntity<LoginTokenDto> loginByUsernameAndPassword(@RequestBody LoginDto dto) {
         User user = usersService.getUserByUsername(dto.username());
         if (user == null) {
             return ResponseEntity.notFound().build();
@@ -32,6 +33,6 @@ public class LoginController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(new LoginTokenDto(token));
     }
 }
