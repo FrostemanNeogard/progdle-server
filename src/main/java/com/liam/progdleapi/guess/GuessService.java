@@ -78,6 +78,40 @@ public class GuessService {
         return STATES.INCORRECT;
     }
 
+    public long getScoreFromGuess(Guess guess) {
+        long score = 0L;
+        switch(guess.getName()) {
+            case CORRECT -> score += 300;
+            case PARTIAL -> score += 50;
+            case INCORRECT -> score += 10;
+        }
+        switch(guess.getOs()) {
+            case CORRECT -> score += 50;
+            case PARTIAL -> score += 25;
+            case INCORRECT -> score += 0;
+        }
+        switch(guess.getDomain()) {
+            case CORRECT -> score += 50;
+            case PARTIAL -> score += 25;
+            case INCORRECT -> score += 0;
+        }
+        switch(guess.getMemorySafe()) {
+            case CORRECT -> score += 25;
+            case PARTIAL, INCORRECT -> score += 5;
+        }
+        switch(guess.getParadigm()) {
+            case CORRECT -> score += 50;
+            case PARTIAL -> score += 25;
+            case INCORRECT -> score += 5;
+        }
+        switch(guess.getTyping()) {
+            case CORRECT -> score += 50;
+            case PARTIAL -> score += 25;
+            case INCORRECT -> score += 5;
+        }
+        return score;
+    }
+
     public enum STATES {
         INCORRECT,
         PARTIAL,
