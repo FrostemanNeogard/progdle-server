@@ -45,7 +45,13 @@ public class GuessController {
             if (user == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(dto);
             }
-            user.setScore(user.getScore() + score);
+            if (user.getGuessesMade() < 5 && !user.isHasWon()) {
+                user.setScore(user.getScore() + score);
+                user.setGuessesMade(user.getGuessesMade() + 1);
+            }
+            if (guess.getName().equals(GuessService.STATES.CORRECT)) {
+                user.setHasWon(true);
+            }
             usersService.updateUser(user);
         }
 
