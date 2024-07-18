@@ -41,4 +41,16 @@ public class UsersService {
         }
         return usersRepository.save(user);
     }
+
+    public User getUserByToken(String token) {
+        String[] parts = token.split("&");
+        User user = usersRepository.findByUsername(parts[0]);
+        if (user == null) {
+            return null;
+        }
+        if (parts.length > 1 && user.getPassword().equals(parts[1])) {
+            return user;
+        }
+        return null;
+    }
 }
