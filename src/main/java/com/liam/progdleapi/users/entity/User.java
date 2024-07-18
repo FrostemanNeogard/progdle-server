@@ -30,4 +30,10 @@ public class User {
 
     @Column
     private long score;
+
+    @Column
+    private long guessesMade;
+
+    @Column
+    private boolean hasWon;
 }
