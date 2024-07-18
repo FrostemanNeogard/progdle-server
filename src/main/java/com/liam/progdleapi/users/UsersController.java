@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin
@@ -29,6 +28,15 @@ public class UsersController {
         return ResponseEntity.ok(users.stream().map(UserDto::from).toList());
     }
 
+    @GetMapping("/{username}")
+    public ResponseEntity<UserDto> getUserByUsername(@PathVariable String username) {
+        User user = usersService.getUserByUsername(username);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(UserDto.from(user));
+    }
+
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody CreateUserDto dto) {
         User user = new User();
@@ -44,11 +52,11 @@ public class UsersController {
                 .body(UserDto.from(newUser));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{username}")
     public ResponseEntity<UserDto> updateUserById(
-            @PathVariable UUID id,
+            @PathVariable String username,
             @RequestBody UpdateUserDto dto) {
-        User user = usersService.getUserById(id);
+        User user = usersService.getUserByUsername(username);
         if (user == null) {
             return ResponseEntity.notFound().build();
         }
