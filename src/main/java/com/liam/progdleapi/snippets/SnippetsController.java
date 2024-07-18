@@ -39,12 +39,12 @@ public class SnippetsController {
 
     @GetMapping("/daily/{level}")
     public ResponseEntity<SnippetDto> getDailySnippetByLevel(@PathVariable Integer level) {
-        if (level < 1 || level > 5) {
+        if (level < 0 || level > 5) {
             return ResponseEntity.badRequest().build();
         }
         List<Snippet> snippets = this.snippetsService.getDailySnippets();
         System.out.println(snippets);
-        return ResponseEntity.ok(SnippetDto.from(snippets.get(level - 1)));
+        return ResponseEntity.ok(SnippetDto.from(snippets.get(level)));
     }
 
     @PostMapping
