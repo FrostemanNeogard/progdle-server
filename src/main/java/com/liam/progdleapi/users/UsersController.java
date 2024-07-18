@@ -60,10 +60,9 @@ public class UsersController {
         if (user == null) {
             return ResponseEntity.notFound().build();
         }
-        User newUser = new User(user);
-        newUser.setUsername(dto.username());
-        newUser.setProfilePictureSrc(dto.profilePictureSrc());
-        User updatedUser = usersService.updateUser(newUser);
+        user.setUsername(dto.username());
+        user.setProfilePictureSrc(dto.profilePictureSrc());
+        User updatedUser = usersService.updateUser(user);
         if (updatedUser == null) {
             return ResponseEntity.notFound().build();
         }
