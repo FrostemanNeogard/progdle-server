@@ -18,7 +18,7 @@ public class LanguagesService {
 
     public Language getDailyLanguage() {
         if (CORRECT_LANGUAGE == null) {
-            CORRECT_LANGUAGE = languageRepository.findByName("JavaScript");
+            CORRECT_LANGUAGE = languageRepository.findByName("C++");
         }
         return CORRECT_LANGUAGE;
     }
