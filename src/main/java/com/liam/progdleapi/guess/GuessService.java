@@ -100,31 +100,25 @@ public class GuessService {
             case INCORRECT -> score -= 10;
         }
         switch(guess.getOs()) {
-            case CORRECT -> score += 50;
             case PARTIAL -> score -= 5;
             case INCORRECT -> score -= 10;
         }
         switch(guess.getDomain()) {
-            case CORRECT -> score += 50;
             case PARTIAL -> score -= 5;
             case INCORRECT -> score -= 10;
         }
         switch(guess.getMemorySafe()) {
-            case CORRECT -> score += 25;
             case PARTIAL, INCORRECT -> score -= 10;
         }
         switch(guess.getParadigm()) {
-            case CORRECT -> score += 50;
             case PARTIAL -> score -= 5;
             case INCORRECT -> score -= 10;
         }
         switch(guess.getTyping()) {
-            case CORRECT -> score += 50;
             case PARTIAL -> score -= 5;
             case INCORRECT -> score -= 10;
         }
         switch(guess.getReleaseYear()) {
-            case CORRECT -> score += 50;
             case PARTIAL, INCORRECT -> score -= 5;
         }
         return score;
