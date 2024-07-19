@@ -5,6 +5,8 @@ import com.liam.progdleapi.languages.LanguagesService;
 import com.liam.progdleapi.languages.entity.Language;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @Service
 public class GuessService {
 
@@ -25,30 +27,39 @@ public class GuessService {
     }
 
     private STATES validateParadigm(Language language) {
-        if (language.getParadigm().equals(languagesService.getDailyLanguage().getParadigm())) {
+        String[] dailyParadigms = languagesService.getDailyLanguage().getParadigm().split(",");
+        String[] languageParadigms = language.getParadigm().split(",");
+        if (Arrays.equals(dailyParadigms, languageParadigms)) {
             return STATES.CORRECT;
         }
-        if (languagesService.getDailyLanguage().getParadigm().contains(language.getParadigm())) {
+        if (Arrays.stream(dailyParadigms)
+                .anyMatch(dp -> Arrays.asList(languageParadigms).contains(dp))) {
             return STATES.PARTIAL;
         }
         return STATES.INCORRECT;
     }
 
     private STATES validateTyping(Language language) {
-        if (language.getTyping().equals(languagesService.getDailyLanguage().getTyping())) {
+        String[] dailyTypings = languagesService.getDailyLanguage().getTyping().split(",");
+        String[] languageTypings = language.getTyping().split(",");
+        if (Arrays.equals(dailyTypings, languageTypings)) {
             return STATES.CORRECT;
         }
-        if (languagesService.getDailyLanguage().getTyping().contains(language.getTyping())) {
+        if (Arrays.stream(dailyTypings)
+                .anyMatch(dt -> Arrays.asList(languageTypings).contains(dt))) {
             return STATES.PARTIAL;
         }
         return STATES.INCORRECT;
     }
 
     private STATES validateDomain(Language language) {
-        if (language.getDomain().equals(languagesService.getDailyLanguage().getDomain())) {
+        String[] dailyDomains = languagesService.getDailyLanguage().getDomain().split(",");
+        String[] languageDomains = language.getDomain().split(",");
+        if (Arrays.equals(dailyDomains, languageDomains)) {
             return STATES.CORRECT;
         }
-        if (languagesService.getDailyLanguage().getDomain().contains(language.getDomain())) {
+        if (Arrays.stream(dailyDomains)
+                .anyMatch(dd -> Arrays.asList(languageDomains).contains(dd))) {
             return STATES.PARTIAL;
         }
         return STATES.INCORRECT;
@@ -62,10 +73,13 @@ public class GuessService {
     }
 
     private STATES validateOs(Language language) {
-        if (language.getOs().equals(languagesService.getDailyLanguage().getOs())) {
+        String[] dailyOs = languagesService.getDailyLanguage().getOs().split(",");
+        String[] languageOs = language.getOs().split(",");
+        if (Arrays.equals(dailyOs, languageOs)) {
             return STATES.CORRECT;
         }
-        if (languagesService.getDailyLanguage().getOs().contains(language.getOs())) {
+        if (Arrays.stream(dailyOs)
+                .anyMatch(dos -> Arrays.asList(languageOs).contains(dos))) {
             return STATES.PARTIAL;
         }
         return STATES.INCORRECT;
