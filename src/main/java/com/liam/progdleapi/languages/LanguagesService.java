@@ -3,7 +3,9 @@ package com.liam.progdleapi.languages;
 import com.liam.progdleapi.languages.entity.Language;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -17,8 +19,11 @@ public class LanguagesService {
     }
 
     public Language getDailyLanguage() {
+        // Random random = new Random(LocalDateTime.now().getDayOfMonth() + LocalDateTime.now().getYear());
+        Random random = new Random();
         if (CORRECT_LANGUAGE == null) {
-            CORRECT_LANGUAGE = languageRepository.findByName("C++");
+            List<Language> allLanguages = languageRepository.findAll();
+            CORRECT_LANGUAGE = allLanguages.get(random.nextInt(allLanguages.size()));
         }
         return CORRECT_LANGUAGE;
     }
