@@ -43,7 +43,6 @@ public class SnippetsController {
             return ResponseEntity.badRequest().build();
         }
         List<Snippet> snippets = this.snippetsService.getDailySnippets();
-        System.out.println(snippets);
         return ResponseEntity.ok(SnippetDto.from(snippets.get(level)));
     }
 
