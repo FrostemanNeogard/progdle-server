@@ -32,10 +32,12 @@ public class SnippetsService {
     }
 
     public Snippet createSnippet(Snippet snippet) {
-        Snippet existingSnippet = this.snippetsRepo.findByLevel(snippet.getLevel());
-        if (existingSnippet != null) {
-            this.snippetsRepo.delete(existingSnippet);
-        }
+        List<Snippet> existingSnippets = this.snippetsRepo.findByLanguage(snippet.getLanguage());
+        existingSnippets
+                .stream()
+                .filter(e -> e.getLevel() == snippet.getLevel())
+                .findFirst()
+                .ifPresent(this.snippetsRepo::delete);
         return this.snippetsRepo.save(snippet);
     }
 
